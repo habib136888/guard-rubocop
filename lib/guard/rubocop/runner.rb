@@ -1,5 +1,5 @@
 require 'json'
-
+require 'terminal-notifier'
 module Guard
   class RuboCop
     # This class runs `rubocop` command, retrieves result and notifies.
@@ -89,6 +89,7 @@ module Guard
       def notify(passed)
         image = passed ? :success : :failed
         Notifier.notify(summary_text, title: 'RuboCop results', image: image)
+        TerminalNotifier.notify summary_text, title: 'RuboCop results'
       end
 
       def summary_text
